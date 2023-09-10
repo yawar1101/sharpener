@@ -33,3 +33,6 @@ for (let item of items) {
     item.style.fontWeight = 'bold';
 }
 
+
+const li = document.getElementsByTagName('li');
+console.log(li);
