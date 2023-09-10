@@ -20,4 +20,16 @@ const h2Title = document.querySelector('.title');
 h2Title.style.fontWeight = 'bold';
 h2Title.style.color = 'green';
 
+const items = document.getElementsByClassName('list-group-item');
+console.dir(items);
+
+// const item = items[0];
+// console.log(item);
+
+items[2].style.backgroundColor = 'green';
+
+for (let item of items) {
+    // console.log(item.innerText);
+    item.style.fontWeight = 'bold';
+}
 
