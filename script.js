@@ -22,12 +22,11 @@
 //     alert('Details have been saved to local storage');
 // });
 
-
 const userForm = document.getElementById('userForm');
 const userDataDiv = document.getElementById('user-data');
 
 userForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -39,10 +38,13 @@ userForm.addEventListener('submit', (event) => {
     const userDetails = {
         name: name,
         email: email,
-        phone: phone
+        phone: phone,
     };
 
     localStorage.setItem(userKey, JSON.stringify(userDetails));
+
+    const userContainer = document.createElement('div');
+    userContainer.classList.add('user-container');
 
     const nameParagraph = document.createElement('p');
     nameParagraph.textContent = `Name: ${userDetails.name}`;
@@ -53,11 +55,22 @@ userForm.addEventListener('submit', (event) => {
     const ageParagraph = document.createElement('p');
     ageParagraph.textContent = `Age: ${userDetails.age}`;
 
-    userDataDiv.appendChild(nameParagraph);
-    userDataDiv.appendChild(emailParagraph);
-    userDataDiv.appendChild(ageParagraph);
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('btn', 'btn-danger', 'delete-button');
 
+    deleteButton.addEventListener('click', () => {
+        localStorage.removeItem(userKey);
 
+        userDataDiv.removeChild(userContainer);
+    });
+
+    userContainer.appendChild(nameParagraph);
+    userContainer.appendChild(emailParagraph);
+    userContainer.appendChild(ageParagraph);
+    userContainer.appendChild(deleteButton);
+
+    userDataDiv.appendChild(userContainer);
 
     alert('User details have been saved in local storage.');
 });
