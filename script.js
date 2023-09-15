@@ -24,6 +24,7 @@
 
 
 const userForm = document.getElementById('userForm');
+const userDataDiv = document.getElementById('user-data');
 
 userForm.addEventListener('submit', (event) => {
     event.preventDefault(); 
@@ -32,13 +33,29 @@ userForm.addEventListener('submit', (event) => {
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
 
+    const timestamp = new Date().getTime();
+    const userKey = `userDetails_${timestamp}`;
+
     const userDetails = {
         name: name,
         email: email,
         phone: phone
     };
 
-    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+    localStorage.setItem(userKey, JSON.stringify(userDetails));
+
+    const nameParagraph = document.createElement('p');
+    nameParagraph.textContent = `Name: ${userDetails.name}`;
+
+    const emailParagraph = document.createElement('p');
+    emailParagraph.textContent = `Email: ${userDetails.email}`;
+
+    const ageParagraph = document.createElement('p');
+    ageParagraph.textContent = `Age: ${userDetails.age}`;
+
+    userDataDiv.appendChild(nameParagraph);
+    userDataDiv.appendChild(emailParagraph);
+    userDataDiv.appendChild(ageParagraph);
 
 
 
