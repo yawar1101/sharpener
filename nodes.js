@@ -1,74 +1,135 @@
-const itemList = document.querySelector('#items')
+const h1 = document.querySelector('#header-title');
 
-// parentNode
+const header = document.querySelector('#main-header');
 
-// console.log(itemList.parentNode);
-// itemList.parentNode.style.backgroundColor = 'grey';
+// innerText consider styling
 
-// console.log(itemList.parentNode.parentNode)
+// console.log(h1.textContent);
 
-// parentElement
+header.style.borderBottom = '4px solid black';
 
-// console.log(itemList.parentElement);
-// itemList.parentElement.style.backgroundColor = 'grey';
+// const ul = document.querySelector('#items');
 
-// console.log(itemList.parentElement.parentElement)
+// const items = document.querySelectorAll('.list-group-item');
+// for (let i = 0; i < items.length; i++) {
+//     items[i].style.backgroundColor = 'grey';
+// }
 
-// childNode
+// items[1].textContent = 'Yawar';
+// items[2].style.fontWeight = 'bold';
+// items[3].style.backgroundColor = 'Cyan';
 
-// console.log(itemList.childNodes)
-console.log(itemList.children)
+// const input = document.querySelector('input');
+// input.value = 'Yawar';
 
-// firstElementChild
+// const item = document.querySelector('.list-group-item');
+// console.log(item);
+// item.style.color = 'violet';
 
-console.log(itemList.firstElementChild);
-// itemList.firstElementChild.textContent = 'Hello';
+// const secondItem = document.querySelector('.list-group-item:nth-child(2)')
+// console.log(secondItem);
+// secondItem.style.color = 'indigo';
 
-// lastElementChild
+// const thirdItem = document.querySelector('.list-group-item:nth-child(3)')
+// console.log(thirdItem);
+// thirdItem.style.color = 'blue';
 
-console.log(itemList.lastElementChild);
-// itemList.lastElementChild.textContent = 'Bye';
+// const fourthItem= document.querySelector('.list-group-item:nth-child(4)')
+// console.log(fourthItem);
+// fourthItem.style.color = 'green';
 
-// nextSibling
+// Traversing the DOM
 
-console.log(itemList.nextSibling);
+const items = document.querySelector('#items');
+// console.log(items.parentNode)
+// items.parentNode.style.backgroundColor = 'grey';
+// console.log(items.parentNode.parentNode)
 
-// nextElementSibling
+// ChildNodes
+// console.log(items.childNodes);
 
-console.log(itemList.nextElementSibling);
+// Pro Tip - don't use childNodes property
 
-// previousSibling
+// children property
 
-console.log(itemList.previousSibling);
+// console.log(items.children)
+// items.children[1].style.backgroundColor = 'blue';
 
-// previousElementSibling
+items.firstElementChild.textContent = 'Updated text';
 
-console.log(itemList.previousElementSibling);
-// itemList.previousElementSibling.textContent = 'HEllo';
+items.lastElementChild.textContent = 'Last element updated';
 
-// createElement
+// Next Sibling
+
+// console.log(items.nextSibling);
+
+// Next Element Sibling
+
+// console.log(items.nextElementSibling);
+
+// console.log(items.previousElementSibling);
+items.previousElementSibling.style.color = 'green';
+
+// Create element
 
 const newDiv = document.createElement('div');
 
 newDiv.className = 'hello';
+newDiv.id = 'hello1';
 
-newDiv.id = 'he11';
+// Create text node
+const newDivText = document.createTextNode('Inside div');
 
-newDiv.setAttribute('title', 'Some title');
-
-const newDivText = document.createTextNode('HEllo');
-
+// Add text to div
 newDiv.appendChild(newDivText);
 
 const container = document.querySelector('header .container');
-const h1 = document.querySelector('header h1');
+const mainHeader = document.querySelector('header h1');
+// container.appendChild(newDiv);
 
-console.log(newDiv);
+container.insertBefore(newDiv, mainHeader);
 
-container.insertBefore(newDiv, h1);
+// newDiv.style.fontSize = '30px';
 
-const newItem = document.createElement('li');
-newItem.className = 'list-group-item';
-newItem.textContent = 'HEllo';
+// console.log(newDiv);
 
-itemList.insertBefore(newItem, itemList.firstElementChild);
+const button = document.querySelector('#button');
+
+button.addEventListener('click', () => {
+    // console.log('HIIIIEIEIIEEIIE');
+    document.getElementById('header-title').textContent = 'New title';
+});
+
+const box = document.getElementById('box');
+console.log(box);
+
+// box.addEventListener('mouseenter', (e) => {
+//     console.log('Event Type', e.type);
+// })
+
+// box.addEventListener('mouseover', (e) => {
+//     console.log('Event Type', e.type);
+// })
+
+box.addEventListener('mousemove', (e) => {
+    // console.log('Event Type', e.type);
+    // console.log(e.clientX);
+    // output.innerHTML =
+    //     '<h3>MouseX: ' + e.offsetX + ' </h3><h3>MouseY: ' + e.offsetY + '</h3>';
+    box.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
+});
+
+// box.addEventListener('mouseout', (e) => {
+//     console.log('Event Type', e.type);
+// })
+
+
+const itemInput = document.querySelector('input[type=text]');
+// console.log(itemInput);
+const form = document.querySelector('form');
+// console.log(form);
+
+itemInput.addEventListener('keydown', (e) => {
+    // console.log(e.type);
+    console.log(e.target.value);
+})
