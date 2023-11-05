@@ -29,9 +29,23 @@ userForm.addEventListener('submit', (event) => {
             email: email,
             phone: phone,
         };
-        localStorage.setItem(editKey, JSON.stringify(userDetails));
+
+        axios
+            .put(
+                `https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/${editKey}`,
+                userDetails
+            )
+            .then((response) => {
+                console.log(response);
+                fetchAndDisplayUserData();
+            })
+            .catch((err) => console.log(err));
+
+        alert('User details have been updated.');
         editMode = false;
         editKey = null;
+
+
     } else {
         const userDetails = {
             name: name,
@@ -80,7 +94,7 @@ const displayUserData = (userData) => {
         editButton.classList.add('btn', 'btn-warning', 'edit-button');
         editButton.addEventListener('click', function () {
             editMode = true;
-            editKey = userKey;
+            editKey = userDetails._id;
             const { name, email, phone } = userDetails;
             document.getElementById('name').value = name;
             document.getElementById('email').value = email;
