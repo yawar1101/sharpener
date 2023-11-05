@@ -5,12 +5,15 @@ let editMode = false;
 let editKey = null;
 
 const fetchAndDisplayUserData = () => {
-    axios.get('https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/')
-        .then(response => {
+    axios
+        .get(
+            'https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/'
+        )
+        .then((response) => {
             const userData = response.data;
             displayUserData(userData);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
 };
 
 userForm.addEventListener('submit', (event) => {
@@ -24,7 +27,7 @@ userForm.addEventListener('submit', (event) => {
         const userDetails = {
             name: name,
             email: email,
-            phone: phone
+            phone: phone,
         };
         localStorage.setItem(editKey, JSON.stringify(userDetails));
         editMode = false;
@@ -33,25 +36,33 @@ userForm.addEventListener('submit', (event) => {
         const userDetails = {
             name: name,
             email: email,
-            phone: phone
+            phone: phone,
         };
 
-        axios.post('https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/', userDetails)
-            .then(response => {
+        axios
+            .post(
+                'https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/',
+                userDetails
+            )
+            .then((response) => {
                 console.log(response);
                 fetchAndDisplayUserData();
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     }
 
-    alert(editMode ? 'User details have been updated.' : 'User details have been saved.');
+    alert(
+        editMode
+            ? 'User details have been updated.'
+            : 'User details have been saved.'
+    );
 
     userForm.reset();
 });
 
 const displayUserData = (userData) => {
     userDataDiv.innerHTML = '';
-    userData.forEach(userDetails => {
+    userData.forEach((userDetails) => {
         const userContainer = document.createElement('div');
         userContainer.classList.add('user-container');
 
@@ -80,7 +91,15 @@ const displayUserData = (userData) => {
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('btn', 'btn-danger', 'delete-button');
         deleteButton.addEventListener('click', function () {
-            fetchAndDisplayUserData();
+            axios
+                .delete(
+                    `https://crudcrud.com/api/ba25bf77b5054d929d3182e23dc182b0/appointments/${userDetails._id}`
+                )
+                .then((response) => {
+                    console.log(response);
+                    fetchAndDisplayUserData();
+                })
+                .catch((err) => console.log(err));
         });
 
         userContainer.appendChild(nameParagraph);
